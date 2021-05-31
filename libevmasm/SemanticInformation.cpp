@@ -61,7 +61,7 @@ bool SemanticInformation::breaksCSEAnalysisBlock(AssemblyItem const& _item, bool
 		InstructionInfo info = instructionInfo(_item.instruction());
 		if (_item.instruction() == Instruction::SSTORE)
 			return false;
-		if (_item.instruction() == Instruction::MSTORE)
+		if (_item.instruction() == Instruction::MSTORE || _item.instruction() == Instruction::MCOPY)
 			return false;
 		if (!_msizeImportant && (
 			_item.instruction() == Instruction::MLOAD ||
@@ -246,6 +246,7 @@ SemanticInformation::Effect SemanticInformation::memory(Instruction _instruction
 	case Instruction::RETURNDATACOPY:
 	case Instruction::MSTORE:
 	case Instruction::MSTORE8:
+	case Instruction::MCOPY:
 	case Instruction::CALL:
 	case Instruction::CALLCODE:
 	case Instruction::DELEGATECALL:
